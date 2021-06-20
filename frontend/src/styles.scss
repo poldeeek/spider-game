@@ -6,11 +6,12 @@ html {
   font-size: 62.5%; /* 1 rem = 10px */
   overflow-x: hidden;
   overflow-y: scroll;
+  height: 100vh;
 }
 
 body {
   line-height: 1.5;
   letter-spacing: 0.08rem;
   padding: 0;
-  margin: 0;
+  margin: 0 auto;
 }
