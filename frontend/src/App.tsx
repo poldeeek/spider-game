@@ -1,15 +1,5 @@
-import './styles.scss';
-import image from './image.png';
-import svgImage from './svgImage.svg';
-
 const App = () => {
-  return (
-    <>
-      <h1>Hello!</h1>
-      <img src={image} alt='image' width='300' height='300' />
-      <img src={svgImage} alt='image' width='300' height='300' />
-    </>
-  );
+  return <div></div>;
 };
 
 export default App;
