@@ -1,4 +1,4 @@
-import './styles.css';
+import './styles.scss';
 import image from './image.png';
 import svgImage from './svgImage.svg';
 
