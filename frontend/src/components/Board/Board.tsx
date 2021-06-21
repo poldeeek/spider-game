@@ -1,27 +1,18 @@
+import { useContext } from 'react';
 import './Board.scss';
 import Spider from '../Spider/Spider';
 import Net from '../Net/Net';
+import SpidersContext from '../../../context/spidersContext';
 
 const Board = () => {
-  const spiders = [
-    {
-      initTop: 300, // y
-      initLeft: 400 // x
-    },
-    {
-      initTop: 50,
-      initLeft: 100
-    },
-    {
-      initTop: 50,
-      initLeft: 700
-    }
-  ];
+  const { spidersState } = useContext(SpidersContext);
+  const spiders = spidersState.spiders;
 
   const nets = [
     [0, 1],
     [0, 2],
-    [1, 2]
+    [1, 2],
+    [0, 3]
   ];
 
   return (
