@@ -18,9 +18,9 @@ const Board = () => {
   return (
     <div className='board'>
       {spiders &&
-        spiders.map((spider, i) => (
-          <Spider key={i} initLeft={spider.initLeft} initTop={spider.initTop} />
-        ))}
+        spiders.map((spider) => {
+          return <Spider key={spider.id} spiderId={spider.id} />;
+        })}
       {nets.map((net, i) => {
         return (
           <Net key={i} spider1={spiders[net[0]]} spider2={spiders[net[1]]} />
