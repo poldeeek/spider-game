@@ -1,26 +1,43 @@
-import { useReducer } from 'react';
+import { useReducer, Dispatch } from 'react';
 import { createContext } from 'react';
 
-const initState = [
-  {
-    initTop: 300, // y
-    initLeft: 400 // x
-  },
-  {
-    initTop: 50,
-    initLeft: 100
-  },
-  {
-    initTop: 50,
-    initLeft: 700
-  },
-  {
-    initTop: 250,
-    initLeft: 100
-  }
-];
+type Spider = {
+  initTop: number;
+  initLeft: number;
+};
 
-const SpidersContext = createContext({});
+type InitialStateType = {
+  spiders: Spider[];
+};
+
+const initState = {
+  spiders: [
+    {
+      initTop: 300, // y
+      initLeft: 400 // x
+    },
+    {
+      initTop: 50,
+      initLeft: 100
+    },
+    {
+      initTop: 50,
+      initLeft: 700
+    },
+    {
+      initTop: 250,
+      initLeft: 100
+    }
+  ]
+};
+
+const SpidersContext = createContext<{
+  spidersState: InitialStateType;
+  dispatch: Dispatch<any>;
+}>({
+  spidersState: initState,
+  dispatch: () => null
+});
 
 const SpidersReducer = (state: any, action: any) => {
   switch (action.type) {
@@ -32,9 +49,10 @@ const SpidersReducer = (state: any, action: any) => {
 const SpidersProvider: React.FC<{}> = ({ children }) => {
   const [state, dispatch] = useReducer(SpidersReducer, initState);
 
-  const value = { state, dispatch };
   return (
-    <SpidersContext.Provider value={value}>{children}</SpidersContext.Provider>
+    <SpidersContext.Provider value={{ spidersState: state, dispatch }}>
+      {children}
+    </SpidersContext.Provider>
   );
 };
 
