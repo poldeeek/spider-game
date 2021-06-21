@@ -17,7 +17,6 @@ const Spider: React.FC<ISpiderProps> = ({ initTop, initLeft }) => {
   const [pos4, setPos4] = useState(0);
 
   const handleMouseDown = (e: MouseEvent<HTMLDivElement>) => {
-    console.log('handleMouseDown');
     e = e || window.event;
     e.preventDefault();
     if (!myRef || !myRef.current) return;
@@ -30,17 +29,13 @@ const Spider: React.FC<ISpiderProps> = ({ initTop, initLeft }) => {
   };
 
   const handleMouseUp = (e: MouseEvent<HTMLDivElement>) => {
-    console.log('handleMouseUp');
     e = e || window.event;
     e.preventDefault();
     setActive(false);
   };
 
   const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
-    if (!active) return;
-    console.log('handleMouseMove');
-
-    if (!myRef || !myRef.current) return;
+    if (!myRef || !myRef.current || !active) return;
 
     e = e || window.event;
     e.preventDefault();
@@ -64,6 +59,7 @@ const Spider: React.FC<ISpiderProps> = ({ initTop, initLeft }) => {
       onMouseDown={handleMouseDown}
       onMouseUp={handleMouseUp}
       onMouseMove={handleMouseMove}
+      onMouseLeave={() => setActive(false)}
       style={{ top: top, left: left }}></div>
   );
 };
