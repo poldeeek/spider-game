@@ -9,77 +9,61 @@ interface ISpiderProps {
 const Spider: React.FC<ISpiderProps> = ({ initTop, initLeft }) => {
   const [top, setTop] = useState(initTop);
   const [left, setLeft] = useState(initLeft);
+  const [active, setActive] = useState(false);
+
   const myRef = useRef<HTMLDivElement>(null);
 
-  // const handleMouseMove = (e: globalThis.MouseEvent) => {};
+  const [pos3, setPos3] = useState(0);
+  const [pos4, setPos4] = useState(0);
 
-  const handleMouseUp = (e: globalThis.MouseEvent) => {
+  const handleMouseDown = (e: MouseEvent<HTMLDivElement>) => {
+    console.log('handleMouseDown');
+    e = e || window.event;
+    e.preventDefault();
+    if (!myRef || !myRef.current) return;
+
+    // image position
+    setPos3(e.clientX);
+    setPos4(e.clientY);
+
+    setActive(true);
+  };
+
+  const handleMouseUp = (e: MouseEvent<HTMLDivElement>) => {
     console.log('handleMouseUp');
     e = e || window.event;
     e.preventDefault();
-    if (!myRef || !myRef.current) return;
-    document.onmousemove = null;
-    document.onmouseup = null;
-
-    // TODO everything is null, but the objects are still moving after no mouse up
-    console.log(document.onmouseup, myRef.current.onmouseup);
-    console.log(document.onmousemove, myRef.current.onmousemove);
+    setActive(false);
   };
 
-  const handleMouseDown = (e: globalThis.MouseEvent) => {
+  const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
+    if (!active) return;
+    console.log('handleMouseMove');
+
+    if (!myRef || !myRef.current) return;
+
     e = e || window.event;
     e.preventDefault();
+
+    let pos1 = pos3 - e.clientX;
+    let pos2 = pos4 - e.clientY;
+    setPos3(e.clientX);
+    setPos4(e.clientY);
+    // set the element's new position:
     if (!myRef || !myRef.current) return;
 
-    let pos1 = 0,
-      pos2 = 0,
-      pos3 = 0,
-      pos4 = 0;
-
-    // image position
-    pos3 = e.clientX;
-    pos4 = e.clientY;
-
-    document.addEventListener('mouseup', handleMouseUp);
-
-    document.addEventListener('mousemove', (e) => {
-      console.log('mousemove');
-
-      if (!myRef || !myRef.current) return;
-
-      e = e || window.event;
-      e.preventDefault();
-      // calculate the new cursor position:
-      pos1 = pos3 - e.clientX;
-      pos2 = pos4 - e.clientY;
-      pos3 = e.clientX;
-      pos4 = e.clientY;
-
-      // set the element's new position:
-      myRef.current.style.top = myRef.current.offsetTop - pos2 + 'px';
-      myRef.current.style.left = myRef.current.offsetLeft - pos1 + 'px';
-    });
+    myRef.current.style.top = myRef.current.offsetTop - pos2 + 'px';
+    myRef.current.style.left = myRef.current.offsetLeft - pos1 + 'px';
   };
-
-  useEffect(() => {
-    if (!myRef || !myRef.current) return;
-
-    myRef.current.addEventListener('mousedown', handleMouseDown);
-
-    return () => {
-      if (!myRef || !myRef.current) return;
-      myRef.current.removeEventListener('mousedown', handleMouseDown);
-      document.removeEventListener('mouseup', handleMouseUp);
-      document.onmousemove = null;
-    };
-  }, [myRef]);
-  console.log(document.onmouseup);
 
   return (
     <div
       ref={myRef}
       draggable
       className='spider'
+      onMouseDown={handleMouseDown}
+      onMouseUp={handleMouseUp}
+      onMouseMove={handleMouseMove}
       style={{ top: top, left: left }}></div>
   );
 };
