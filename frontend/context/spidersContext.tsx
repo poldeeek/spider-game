@@ -1,20 +1,20 @@
 import { useReducer, Dispatch } from 'react';
 import { createContext } from 'react';
 
-type Spider = {
+export interface ISpider {
   initTop: number;
   initLeft: number;
-};
+}
 
 type InitialStateType = {
-  spiders: Spider[];
+  spiders: ISpider[];
 };
 
 const initState = {
   spiders: [
     {
-      initTop: 300, // y
-      initLeft: 400 // x
+      initTop: 300,
+      initLeft: 400
     },
     {
       initTop: 50,
