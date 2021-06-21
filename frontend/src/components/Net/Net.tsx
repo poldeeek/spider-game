@@ -46,8 +46,6 @@ const Net: React.FC<{ spider1: any; spider2: any }> = ({
         transformOrigin: `${degrees > 0 ? '0% 0%' : '100% 100%'}`
       });
     }
-
-    console.log(x1, y1, x2, y2);
   }, [spider1, spider2]);
 
   return <div className='net' style={style} ref={myRef}></div>;
