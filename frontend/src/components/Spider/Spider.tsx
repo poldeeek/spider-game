@@ -1,25 +1,29 @@
-import { useEffect, useState, MouseEvent, useRef } from 'react';
+import { useEffect, useContext, useState, MouseEvent, useRef } from 'react';
 import './Spider.scss';
+import SpidersContext from '../../../context/spidersContext';
+import { CHANGE_SPIDER_POSITION } from '../../../context/actionTypes';
 
 interface ISpiderProps {
-  initTop: number;
-  initLeft: number;
+  spiderId: number;
 }
 
-const Spider: React.FC<ISpiderProps> = ({ initTop, initLeft }) => {
-  const [top, setTop] = useState(initTop);
-  const [left, setLeft] = useState(initLeft);
-  const [active, setActive] = useState(false);
+// TODO At this time every spider is rerender when position is changing. It has to be only the active one.
+// TODO useMemo - https://github.com/facebook/react/issues/15156 - try again later
 
+const Spider: React.FC<ISpiderProps> = ({ spiderId }) => {
+  const [active, setActive] = useState(false);
+  const { spidersState, dispatch } = useContext(SpidersContext);
+  const spider = spidersState.spiders.find((spider) => spider.id === spiderId);
+
+  if (!spider) return null;
   const myRef = useRef<HTMLDivElement>(null);
 
   const [pos3, setPos3] = useState(0);
   const [pos4, setPos4] = useState(0);
-
   const handleMouseDown = (e: MouseEvent<HTMLDivElement>) => {
+    if (!myRef || !myRef.current) return;
     e = e || window.event;
     e.preventDefault();
-    if (!myRef || !myRef.current) return;
 
     // image position
     setPos3(e.clientX);
@@ -47,9 +51,25 @@ const Spider: React.FC<ISpiderProps> = ({ initTop, initLeft }) => {
     // set the element's new position:
     if (!myRef || !myRef.current) return;
 
-    myRef.current.style.top = myRef.current.offsetTop - pos2 + 'px';
-    myRef.current.style.left = myRef.current.offsetLeft - pos1 + 'px';
+    const top = myRef.current.offsetTop - pos2;
+    const left = myRef.current.offsetLeft - pos1;
+
+    dispatch({
+      type: CHANGE_SPIDER_POSITION,
+      payload: {
+        id: spiderId,
+        x: top,
+        y: left
+      }
+    });
   };
+
+  useEffect(() => {
+    if (!myRef || !myRef.current) return;
+
+    myRef.current.style.top = spider.x + 'px';
+    myRef.current.style.left = spider.y + 'px';
+  }, [spider]);
 
   return (
     <div
@@ -59,8 +79,7 @@ const Spider: React.FC<ISpiderProps> = ({ initTop, initLeft }) => {
       onMouseDown={handleMouseDown}
       onMouseUp={handleMouseUp}
       onMouseMove={handleMouseMove}
-      onMouseLeave={() => setActive(false)}
-      style={{ top: top, left: left }}></div>
+      onMouseLeave={() => setActive(false)}></div>
   );
 };
 
