@@ -14,7 +14,7 @@ const Spider: React.FC<ISpiderProps> = ({ initTop, initLeft }) => {
   // const handleMouseMove = (e: globalThis.MouseEvent) => {};
 
   const handleMouseUp = (e: globalThis.MouseEvent) => {
-    console.log('haha');
+    console.log('handleMouseUp');
     e = e || window.event;
     e.preventDefault();
     if (!myRef || !myRef.current) return;
@@ -43,7 +43,7 @@ const Spider: React.FC<ISpiderProps> = ({ initTop, initLeft }) => {
     document.addEventListener('mouseup', handleMouseUp);
 
     document.addEventListener('mousemove', (e) => {
-      console.log('lol');
+      console.log('mousemove');
 
       if (!myRef || !myRef.current) return;
 
