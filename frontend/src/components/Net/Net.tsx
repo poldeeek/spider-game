@@ -1,18 +1,29 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, useContext } from 'react';
+import SpidersContext from '../../../context/spidersContext';
+
 import './Net.scss';
 
-const Net: React.FC<{ spider1: any; spider2: any }> = ({
-  spider1,
-  spider2
+const Net: React.FC<{ spider1Id: number; spider2Id: number }> = ({
+  spider1Id,
+  spider2Id
 }) => {
   const [style, setStyle] = useState({});
   const myRef = useRef<HTMLDivElement>(null);
 
+  const { spidersState, dispatch } = useContext(SpidersContext);
+  const spider1 = spidersState.spiders.find(
+    (spider) => spider.id === spider1Id
+  );
+  const spider2 = spidersState.spiders.find(
+    (spider) => spider.id === spider2Id
+  );
+
+  if (!spider1 || !spider2) return null;
   useEffect(() => {
-    let x1 = spider1.initLeft;
-    let y1 = spider1.initTop;
-    let x2 = spider2.initLeft;
-    let y2 = spider2.initTop;
+    let x1 = spider1.y;
+    let y1 = spider1.x;
+    let x2 = spider2.y;
+    let y2 = spider2.x;
 
     if (x1 > x2) {
       let xTmp = x1;
@@ -35,11 +46,11 @@ const Net: React.FC<{ spider1: any; spider2: any }> = ({
       const a = (y2 - y1) / (x2 - x1);
       const radians = Math.atan(a);
       const degrees = radians * (180 / Math.PI);
-      const leftMove = degrees >= 0 ? 75 : -15;
 
+      // PROBLEM FOR MINUS DEGREE VALUES
       setStyle({
         width: `${Math.sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1))}px`,
-        left: (x1 + leftMove).toString() + 'px',
+        left: (x1 + 75).toString() + 'px',
         top: `${Math.min(y1, y2) + 75}px`,
         height: `5px`,
         transform: `rotate(${degrees}deg)`,
