@@ -7,8 +7,8 @@ interface ISpiderProps {
   spiderId: number;
 }
 
-// TODO At this time every spider is rerender when position is changing. It has to be only the active one.
-// TODO useMemo - https://github.com/facebook/react/issues/15156 - try again later
+// TODO At this time every spider is rerender when his position is changing. It has to be only the active one.
+// TODO useMemo - https://github.com/facebook/react/issues/15156 - try again later ?? Maybe the issue is with update context state
 
 const Spider: React.FC<ISpiderProps> = ({ spiderId }) => {
   const [active, setActive] = useState(false);
