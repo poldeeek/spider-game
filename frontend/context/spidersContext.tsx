@@ -10,11 +10,14 @@ export interface ISpider {
   y: number;
 }
 
+export type TNet = [number, number];
+
 type InitialStateType = {
   spiders: ISpider[];
+  nets: TNet[];
 };
 
-const initState = {
+const initState: InitialStateType = {
   spiders: [
     {
       id: 0,
@@ -44,6 +47,12 @@ const initState = {
       x: 250,
       y: 100
     }
+  ],
+  nets: [
+    [0, 1],
+    [0, 2],
+    [1, 2],
+    [0, 3]
   ]
 };
 
