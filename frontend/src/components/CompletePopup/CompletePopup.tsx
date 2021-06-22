@@ -1,6 +1,6 @@
 import { useContext, useEffect, useMemo } from 'react';
 import RoundContext from '../../context/roundContext';
-import { REPLAY } from '../../context/actionTypes';
+import { REPLAY, NEXT_ROUND } from '../../context/actionTypes';
 
 import './CompletePopup.scss';
 
@@ -12,6 +12,12 @@ const CompletePopup = () => {
   const retry = () => {
     roundDispatch({
       type: REPLAY
+    });
+  };
+
+  const nextRound = () => {
+    roundDispatch({
+      type: NEXT_ROUND
     });
   };
 
@@ -27,7 +33,9 @@ const CompletePopup = () => {
           <div className='popup__button' onClick={retry}>
             Retry
           </div>
-          <div className='popup__button'>Next level</div>
+          <div className='popup__button' onClick={nextRound}>
+            Next round
+          </div>
         </div>
       </div>
     </>

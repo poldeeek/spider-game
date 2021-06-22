@@ -1,12 +1,7 @@
 import { useReducer, Dispatch } from 'react';
 import { createContext } from 'react';
 import checkIntersections from '../helpers/checkIntersection';
-import {
-  CHANGE_SPIDER_POSITION,
-  CHECK_INTERSECTION,
-  CHECK_IS_COMPLETED,
-  REPLAY
-} from './actionTypes';
+import * as actions from './actionTypes';
 
 import roundsData from '../roundsData/rounds';
 
@@ -45,7 +40,7 @@ const RoundContext = createContext<{
 
 const RoundReducer = (state: RoundStateType, action: any) => {
   switch (action.type) {
-    case CHANGE_SPIDER_POSITION:
+    case actions.CHANGE_SPIDER_POSITION:
       const foundIndex = state.spiders.findIndex(
         (spider) => spider.id === action.payload.id
       );
@@ -64,13 +59,13 @@ const RoundReducer = (state: RoundStateType, action: any) => {
           ...state.spiders.slice(foundIndex + 1)
         ]
       };
-    case CHECK_INTERSECTION:
+    case actions.CHECK_INTERSECTION:
       const checkedNets = checkIntersections(state);
       return {
         ...state,
         nets: [...checkedNets]
       };
-    case CHECK_IS_COMPLETED:
+    case actions.CHECK_IS_COMPLETED:
       const failIntersection = state.nets.find((net) => net.isIntersection);
       if (!failIntersection) {
         return {
@@ -80,10 +75,27 @@ const RoundReducer = (state: RoundStateType, action: any) => {
         };
       }
       return state;
-    case REPLAY:
+    case actions.REPLAY:
       return {
         ...state,
         ...roundsData[state.round - 1],
+        isComplete: false,
+        showCompletePopup: false
+      };
+    case actions.REPLAY:
+      return {
+        ...state,
+        ...roundsData[state.round - 1],
+        isComplete: false,
+        showCompletePopup: false
+      };
+    case actions.NEXT_ROUND:
+      const nextRound = state.round + 1;
+
+      return {
+        ...state,
+        ...roundsData[nextRound - 1],
+        round: nextRound,
         isComplete: false,
         showCompletePopup: false
       };
