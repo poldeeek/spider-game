@@ -4,7 +4,7 @@ import { REPLAY, NEXT_ROUND, PREV_ROUND } from '../../context/actionTypes';
 
 import './CompletePopup.scss';
 
-const CompletePopup = () => {
+const CompletePopup: React.FC = () => {
   const { roundState, roundDispatch } = useContext(RoundContext);
 
   const round = roundState.round;

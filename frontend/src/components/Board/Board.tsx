@@ -1,10 +1,10 @@
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import './Board.scss';
 import Spider from '../Spider/Spider';
 import Net from '../Net/Net';
 import RoundContext from '../../context/roundContext';
 
-const Board = () => {
+const Board: React.FC = () => {
   const { roundState } = useContext(RoundContext);
 
   const spiders = roundState.spiders;

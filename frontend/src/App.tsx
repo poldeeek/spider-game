@@ -5,7 +5,7 @@ import Header from './components/Header/Header';
 import RoundContext from './context/roundContext';
 
 const App = () => {
-  const { roundState, roundDispatch } = useContext(RoundContext);
+  const { roundState } = useContext(RoundContext);
   const showCompletePopup = roundState.showCompletePopup;
 
   let popup = null;

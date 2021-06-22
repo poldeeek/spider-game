@@ -3,8 +3,8 @@ import './Header.scss';
 import RoundContext from '../../context/roundContext';
 import Timer from '../Timer/Timer';
 
-const Header = () => {
-  const { roundState, roundDispatch } = useContext(RoundContext);
+const Header: React.FC = () => {
+  const { roundState } = useContext(RoundContext);
 
   const round = roundState.round;
   return (
