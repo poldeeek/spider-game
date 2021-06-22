@@ -1,14 +1,14 @@
 import { useContext } from 'react';
 import './Header.scss';
-import GameContext from '../../context/gameContext';
+import RoundContext from '../../context/roundContext';
 
 const Header = () => {
-  const { gameState } = useContext(GameContext);
+  const { roundState, roundDispatch } = useContext(RoundContext);
 
-  const level = gameState.level;
+  const round = roundState.round;
   return (
     <header>
-      <h1>Level {level}</h1>
+      <h1>Level {round}</h1>
     </header>
   );
 };
