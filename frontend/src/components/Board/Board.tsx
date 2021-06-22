@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import './Board.scss';
 import Spider from '../Spider/Spider';
 import Net from '../Net/Net';
