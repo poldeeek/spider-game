@@ -3,10 +3,13 @@ import SpidersContext from '../../../context/spidersContext';
 
 import './Net.scss';
 
-const Net: React.FC<{ spider1Id: number; spider2Id: number }> = ({
-  spider1Id,
-  spider2Id
-}) => {
+interface INetProps {
+  spider1Id: number;
+  spider2Id: number;
+  isIntersection: boolean;
+}
+
+const Net: React.FC<INetProps> = ({ spider1Id, spider2Id, isIntersection }) => {
   const [style, setStyle] = useState({});
   const myRef = useRef<HTMLDivElement>(null);
 
@@ -57,7 +60,12 @@ const Net: React.FC<{ spider1Id: number; spider2Id: number }> = ({
     }
   }, [spider1, spider2]);
 
-  return <div className='net' style={style} ref={myRef}></div>;
+  return (
+    <div
+      className={`net ${isIntersection && 'net--crossed'}`}
+      style={style}
+      ref={myRef}></div>
+  );
 };
 
 export default Net;

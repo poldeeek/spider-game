@@ -13,13 +13,20 @@ const Board = () => {
     <div className='board'>
       {spiders &&
         spiders.map((spider) => {
-          // why doesn't work ?
+          // why doesn't work ? changing one spider in context state change them all in some way ?
           return useMemo(() => {
             return <Spider key={spider.id} spiderId={spider.id} />;
           }, [spider]);
         })}
       {nets.map((net, i) => {
-        return <Net key={i} spider1Id={net[0]} spider2Id={net[1]} />;
+        return (
+          <Net
+            key={i}
+            spider1Id={net.pair[0]}
+            spider2Id={net.pair[1]}
+            isIntersection={net.isIntersection}
+          />
+        );
       })}
     </div>
   );

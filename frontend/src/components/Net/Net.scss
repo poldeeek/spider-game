@@ -1,5 +1,9 @@
 .net {
   position: absolute;
-  background-color: red;
+  background-color: black;
   z-index: 90;
+
+  &--crossed {
+    background-color: red;
+  }
 }

@@ -1,6 +1,7 @@
 import { useReducer, Dispatch } from 'react';
 import { createContext } from 'react';
-import { CHANGE_SPIDER_POSITION } from './actionTypes';
+import checkIntersections from '../src/helpers/checkIntersection';
+import { CHANGE_SPIDER_POSITION, CHECK_INTERSECTION } from './actionTypes';
 
 export interface ISpider {
   id: number;
@@ -10,14 +11,14 @@ export interface ISpider {
   y: number;
 }
 
-export type TNet = [number, number];
+export type TNet = { pair: [number, number]; isIntersection: boolean };
 
-type InitialStateType = {
+type SpidersStateType = {
   spiders: ISpider[];
   nets: TNet[];
 };
 
-const initState: InitialStateType = {
+const initState: SpidersStateType = {
   spiders: [
     {
       id: 0,
@@ -49,37 +50,60 @@ const initState: InitialStateType = {
     }
   ],
   nets: [
-    [0, 1],
-    [0, 2],
-    [1, 2],
-    [0, 3]
+    {
+      pair: [0, 1],
+      isIntersection: false
+    },
+    {
+      pair: [0, 2],
+      isIntersection: false
+    },
+    {
+      pair: [1, 2],
+      isIntersection: false
+    },
+    {
+      pair: [0, 3],
+      isIntersection: false
+    }
   ]
 };
 
 const SpidersContext = createContext<{
-  spidersState: InitialStateType;
+  spidersState: SpidersStateType;
   dispatch: Dispatch<any>;
 }>({
   spidersState: initState,
   dispatch: () => null
 });
 
-const SpidersReducer = (state: InitialStateType, action: any) => {
+const SpidersReducer = (state: SpidersStateType, action: any) => {
   switch (action.type) {
     case CHANGE_SPIDER_POSITION:
-      let spidersCopy = [...state.spiders];
-
       const foundIndex = state.spiders.findIndex(
         (spider) => spider.id === action.payload.id
       );
 
-      spidersCopy[foundIndex] = {
-        ...spidersCopy[foundIndex],
+      const updatedSpider = {
+        ...state.spiders[foundIndex],
         x: action.payload.x,
         y: action.payload.y
       };
 
-      return { ...state, spiders: [...spidersCopy] };
+      return {
+        ...state,
+        spiders: [
+          ...state.spiders.slice(0, foundIndex),
+          updatedSpider,
+          ...state.spiders.slice(foundIndex + 1)
+        ]
+      };
+    case CHECK_INTERSECTION:
+      const checkedNets = checkIntersections(state);
+      return {
+        ...state,
+        nets: [...checkedNets]
+      };
     default:
       return state;
   }

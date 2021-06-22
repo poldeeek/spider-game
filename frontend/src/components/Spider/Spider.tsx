@@ -1,7 +1,10 @@
 import { useEffect, useContext, useState, MouseEvent, useRef } from 'react';
 import './Spider.scss';
 import SpidersContext from '../../../context/spidersContext';
-import { CHANGE_SPIDER_POSITION } from '../../../context/actionTypes';
+import {
+  CHANGE_SPIDER_POSITION,
+  CHECK_INTERSECTION
+} from '../../../context/actionTypes';
 
 interface ISpiderProps {
   spiderId: number;
@@ -21,7 +24,7 @@ const Spider: React.FC<ISpiderProps> = ({ spiderId }) => {
   const [pos3, setPos3] = useState(0);
   const [pos4, setPos4] = useState(0);
 
-  const checkSpiderPosition = () => {
+  function checkSpiderPosition(): boolean {
     if (!myRef || !myRef.current) return false;
 
     const offsetLeft = myRef.current.offsetLeft;
@@ -43,7 +46,7 @@ const Spider: React.FC<ISpiderProps> = ({ spiderId }) => {
       return false;
     }
     return true;
-  };
+  }
 
   const handleMouseDown = (e: MouseEvent<HTMLDivElement>) => {
     if (!myRef || !myRef.current) return;
@@ -81,6 +84,9 @@ const Spider: React.FC<ISpiderProps> = ({ spiderId }) => {
     // set the element's new position:
     const X = myRef.current.offsetLeft - pos1;
     const Y = myRef.current.offsetTop - pos2;
+
+    // can be also in handleMouseUp function to check the lines after use drop the spider
+    dispatch({ type: CHECK_INTERSECTION });
 
     dispatch({
       type: CHANGE_SPIDER_POSITION,
