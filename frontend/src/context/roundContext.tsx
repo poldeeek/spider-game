@@ -1,7 +1,11 @@
 import { useReducer, Dispatch } from 'react';
 import { createContext } from 'react';
 import checkIntersections from '../helpers/checkIntersection';
-import { CHANGE_SPIDER_POSITION, CHECK_INTERSECTION } from './actionTypes';
+import {
+  CHANGE_SPIDER_POSITION,
+  CHECK_INTERSECTION,
+  CHECK_IS_COMPLETED
+} from './actionTypes';
 
 export interface ISpider {
   id: number;
@@ -14,14 +18,16 @@ export interface ISpider {
 export type TNet = { pair: [number, number]; isIntersection: boolean };
 
 export type RoundStateType = {
-  complete: boolean;
+  round: number;
+  isComplete: boolean;
   showCompletePopup: boolean;
   spiders: ISpider[];
   nets: TNet[];
 };
 
 const initState: RoundStateType = {
-  complete: false,
+  round: 1,
+  isComplete: false,
   showCompletePopup: false,
   spiders: [
     {
@@ -108,6 +114,16 @@ const RoundReducer = (state: RoundStateType, action: any) => {
         ...state,
         nets: [...checkedNets]
       };
+    case CHECK_IS_COMPLETED:
+      const failIntersection = state.nets.find((net) => net.isIntersection);
+      if (!failIntersection) {
+        return {
+          ...state,
+          isComplete: true,
+          showCompletePopup: true
+        };
+      }
+      return state;
     default:
       return state;
   }

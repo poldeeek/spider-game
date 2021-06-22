@@ -3,7 +3,8 @@ import './Spider.scss';
 import RoundContext from '../../context/roundContext';
 import {
   CHANGE_SPIDER_POSITION,
-  CHECK_INTERSECTION
+  CHECK_INTERSECTION,
+  CHECK_IS_COMPLETED
 } from '../../context/actionTypes';
 
 interface ISpiderProps {
@@ -68,6 +69,9 @@ const Spider: React.FC<ISpiderProps> = ({ spiderId }) => {
     setActive(false);
     if (!myRef || !myRef.current) return;
     myRef.current.style.zIndex = '100';
+    roundDispatch({
+      type: CHECK_IS_COMPLETED
+    });
   };
 
   const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
