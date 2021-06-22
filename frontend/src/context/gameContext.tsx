@@ -25,7 +25,7 @@ const GameReducer = (state: any, action: any) => {
   }
 };
 
-const GameProvider: React.FC<{}> = ({ children }) => {
+const GameProvider: React.FC = ({ children }) => {
   const [state, dispatch] = useReducer(GameReducer, initState);
 
   return (

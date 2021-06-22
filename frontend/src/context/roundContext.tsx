@@ -14,11 +14,15 @@ export interface ISpider {
 export type TNet = { pair: [number, number]; isIntersection: boolean };
 
 export type RoundStateType = {
+  complete: boolean;
+  showCompletePopup: boolean;
   spiders: ISpider[];
   nets: TNet[];
 };
 
 const initState: RoundStateType = {
+  complete: false,
+  showCompletePopup: false,
   spiders: [
     {
       id: 0,
@@ -109,7 +113,7 @@ const RoundReducer = (state: RoundStateType, action: any) => {
   }
 };
 
-const RoundProvider: React.FC<{}> = ({ children }) => {
+const RoundProvider: React.FC = ({ children }) => {
   const [state, dispatch] = useReducer(RoundReducer, initState);
 
   return (
