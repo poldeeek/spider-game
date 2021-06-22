@@ -13,12 +13,12 @@ export interface ISpider {
 
 export type TNet = { pair: [number, number]; isIntersection: boolean };
 
-export type SpidersStateType = {
+export type RoundStateType = {
   spiders: ISpider[];
   nets: TNet[];
 };
 
-const initState: SpidersStateType = {
+const initState: RoundStateType = {
   spiders: [
     {
       id: 0,
@@ -69,15 +69,15 @@ const initState: SpidersStateType = {
   ]
 };
 
-const SpidersContext = createContext<{
-  spidersState: SpidersStateType;
-  spidersDispatch: Dispatch<any>;
+const RoundContext = createContext<{
+  roundState: RoundStateType;
+  roundDispatch: Dispatch<any>;
 }>({
-  spidersState: initState,
-  spidersDispatch: () => null
+  roundState: initState,
+  roundDispatch: () => null
 });
 
-const SpidersReducer = (state: SpidersStateType, action: any) => {
+const RoundReducer = (state: RoundStateType, action: any) => {
   switch (action.type) {
     case CHANGE_SPIDER_POSITION:
       const foundIndex = state.spiders.findIndex(
@@ -109,16 +109,16 @@ const SpidersReducer = (state: SpidersStateType, action: any) => {
   }
 };
 
-const SpidersProvider: React.FC<{}> = ({ children }) => {
-  const [state, dispatch] = useReducer(SpidersReducer, initState);
+const RoundProvider: React.FC<{}> = ({ children }) => {
+  const [state, dispatch] = useReducer(RoundReducer, initState);
 
   return (
-    <SpidersContext.Provider
-      value={{ spidersState: state, spidersDispatch: dispatch }}>
+    <RoundContext.Provider
+      value={{ roundState: state, roundDispatch: dispatch }}>
       {children}
-    </SpidersContext.Provider>
+    </RoundContext.Provider>
   );
 };
 
-export default SpidersContext;
-export { SpidersReducer, SpidersProvider };
+export default RoundContext;
+export { RoundReducer, RoundProvider };

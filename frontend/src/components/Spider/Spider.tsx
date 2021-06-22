@@ -1,6 +1,6 @@
 import { useEffect, useContext, useState, MouseEvent, useRef } from 'react';
 import './Spider.scss';
-import SpidersContext from '../../context/spidersContext';
+import RoundContext from '../../context/roundContext';
 import {
   CHANGE_SPIDER_POSITION,
   CHECK_INTERSECTION
@@ -15,8 +15,8 @@ interface ISpiderProps {
 
 const Spider: React.FC<ISpiderProps> = ({ spiderId }) => {
   const [active, setActive] = useState(false);
-  const { spidersState, spidersDispatch } = useContext(SpidersContext);
-  const spider = spidersState.spiders.find((spider) => spider.id === spiderId);
+  const { roundState, roundDispatch } = useContext(RoundContext);
+  const spider = roundState.spiders.find((spider) => spider.id === spiderId);
 
   if (!spider) return null;
   const myRef = useRef<HTMLDivElement>(null);
@@ -87,7 +87,7 @@ const Spider: React.FC<ISpiderProps> = ({ spiderId }) => {
     const X = myRef.current.offsetLeft - pos1;
     const Y = myRef.current.offsetTop - pos2;
 
-    spidersDispatch({
+    roundDispatch({
       type: CHANGE_SPIDER_POSITION,
       payload: {
         id: spiderId,
@@ -97,7 +97,7 @@ const Spider: React.FC<ISpiderProps> = ({ spiderId }) => {
     });
 
     // can be also in handleMouseUp function to check the lines after user drop the spider
-    spidersDispatch({ type: CHECK_INTERSECTION });
+    roundDispatch({ type: CHECK_INTERSECTION });
   };
 
   useEffect(() => {

@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, useContext } from 'react';
-import SpidersContext from '../../context/spidersContext';
+import RoundContext from '../../context/roundContext';
 
 import './Net.scss';
 
@@ -13,13 +13,9 @@ const Net: React.FC<INetProps> = ({ spider1Id, spider2Id, isIntersection }) => {
   const [style, setStyle] = useState({});
   const myRef = useRef<HTMLDivElement>(null);
 
-  const { spidersState } = useContext(SpidersContext);
-  const spider1 = spidersState.spiders.find(
-    (spider) => spider.id === spider1Id
-  );
-  const spider2 = spidersState.spiders.find(
-    (spider) => spider.id === spider2Id
-  );
+  const { roundState } = useContext(RoundContext);
+  const spider1 = roundState.spiders.find((spider) => spider.id === spider1Id);
+  const spider2 = roundState.spiders.find((spider) => spider.id === spider2Id);
 
   if (!spider1 || !spider2) return null;
   useEffect(() => {

@@ -2,14 +2,14 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import './styles.scss';
 
-import { SpidersProvider } from './context/spidersContext';
+import { RoundProvider } from './context/roundContext';
 import { GameProvider } from './context/gameContext';
 
 ReactDOM.render(
   <GameProvider>
-    <SpidersProvider>
+    <RoundProvider>
       <App />
-    </SpidersProvider>
+    </RoundProvider>
   </GameProvider>,
   document.getElementById('root')
 );

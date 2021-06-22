@@ -2,18 +2,18 @@ import { useContext, useEffect, useMemo } from 'react';
 import './Board.scss';
 import Spider from '../Spider/Spider';
 import Net from '../Net/Net';
-import SpidersContext from '../../context/spidersContext';
+import RoundContext from '../../context/roundContext';
 
 import { CHECK_INTERSECTION } from '../../context/actionTypes';
 
 const Board = () => {
-  const { spidersState, spidersDispatch } = useContext(SpidersContext);
+  const { roundState, roundDispatch } = useContext(RoundContext);
 
-  const spiders = spidersState.spiders;
-  const nets = spidersState.nets;
+  const spiders = roundState.spiders;
+  const nets = roundState.nets;
 
   useEffect(() => {
-    spidersDispatch({
+    roundDispatch({
       type: CHECK_INTERSECTION
     });
   }, []);

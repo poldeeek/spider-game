@@ -1,9 +1,9 @@
-import { TNet } from '../context/spidersContext';
-import { SpidersStateType } from '../context/spidersContext';
+import { TNet } from '../context/roundContext';
+import { RoundStateType } from '../context/roundContext';
 
 type Point = [number, number];
 
-const checkIntersections = (state: SpidersStateType) => {
+const checkIntersections = (state: RoundStateType) => {
   let checkedNets: TNet[] = [];
   const spiders = [...state.spiders];
   const nets = [...state.nets];
