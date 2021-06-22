@@ -2,4 +2,14 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import './styles.scss';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+import { SpidersProvider } from './context/spidersContext';
+import { GameProvider } from './context/gameContext';
+
+ReactDOM.render(
+  <GameProvider>
+    <SpidersProvider>
+      <App />
+    </SpidersProvider>
+  </GameProvider>,
+  document.getElementById('root')
+);
