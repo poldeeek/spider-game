@@ -35,4 +35,4 @@
 
 
 ## Screenshots
-![Screen](https://user-images.githubusercontent.com/44229717/123005244-1123ce80-d3b6-11eb-9f59-75f5829452af.JPG)
+![Screen](https://user-images.githubusercontent.com/44229717/123006277-b5f2db80-d3b7-11eb-8868-bb2be99efe7f.JPG)
