@@ -56,6 +56,8 @@ const Spider: React.FC<ISpiderProps> = ({ spiderId }) => {
     // image position
     setPos3(e.clientX);
     setPos4(e.clientY);
+
+    // make an active spider displayed before the other
     myRef.current.style.zIndex = '101';
     setActive(true);
   };
@@ -85,9 +87,6 @@ const Spider: React.FC<ISpiderProps> = ({ spiderId }) => {
     const X = myRef.current.offsetLeft - pos1;
     const Y = myRef.current.offsetTop - pos2;
 
-    // can be also in handleMouseUp function to check the lines after use drop the spider
-    dispatch({ type: CHECK_INTERSECTION });
-
     dispatch({
       type: CHANGE_SPIDER_POSITION,
       payload: {
@@ -96,6 +95,9 @@ const Spider: React.FC<ISpiderProps> = ({ spiderId }) => {
         y: Y
       }
     });
+
+    // can be also in handleMouseUp function to check the lines after user drop the spider
+    dispatch({ type: CHECK_INTERSECTION });
   };
 
   useEffect(() => {
