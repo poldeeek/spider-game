@@ -1,7 +1,13 @@
 import Board from './components/Board/Board';
+import Header from './components/Header/Header';
 
 const App = () => {
-  return <Board />;
+  return (
+    <>
+      <Header />
+      <Board />
+    </>
+  );
 };
 
 export default App;
