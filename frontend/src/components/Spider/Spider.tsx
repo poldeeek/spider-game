@@ -20,6 +20,31 @@ const Spider: React.FC<ISpiderProps> = ({ spiderId }) => {
 
   const [pos3, setPos3] = useState(0);
   const [pos4, setPos4] = useState(0);
+
+  const checkSpiderPosition = () => {
+    if (!myRef || !myRef.current) return false;
+
+    const offsetLeft = myRef.current.offsetLeft;
+    const offsetTop = myRef.current.offsetTop;
+    if (offsetLeft > 850) {
+      myRef.current.style.left = 850 + 'px';
+      return false;
+    }
+    if (offsetLeft < 0) {
+      myRef.current.style.left = 0 + 'px';
+      return false;
+    }
+    if (offsetTop > 380) {
+      myRef.current.style.top = 380 + 'px';
+      return false;
+    }
+    if (offsetTop < -30) {
+      myRef.current.style.top = -30 + 'px';
+      return false;
+    }
+    return true;
+  };
+
   const handleMouseDown = (e: MouseEvent<HTMLDivElement>) => {
     if (!myRef || !myRef.current) return;
     e = e || window.event;
@@ -46,13 +71,14 @@ const Spider: React.FC<ISpiderProps> = ({ spiderId }) => {
     e = e || window.event;
     e.preventDefault();
 
+    if (!checkSpiderPosition()) return;
+
     let pos1 = pos3 - e.clientX;
     let pos2 = pos4 - e.clientY;
     setPos3(e.clientX);
     setPos4(e.clientY);
-    // set the element's new position:
-    if (!myRef || !myRef.current) return;
 
+    // set the element's new position:
     const X = myRef.current.offsetLeft - pos1;
     const Y = myRef.current.offsetTop - pos2;
 
