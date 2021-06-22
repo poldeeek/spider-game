@@ -23,6 +23,7 @@ export type RoundStateType = {
   error: string;
   spiders: ISpider[];
   nets: TNet[];
+  time: string;
 };
 
 const initState: RoundStateType = {
@@ -30,8 +31,10 @@ const initState: RoundStateType = {
   error: '',
   roundsNumber: roundsData.length,
   round: 1,
-  isComplete: false,
-  showCompletePopup: false
+  // change to false with first changing spider position
+  isComplete: true,
+  showCompletePopup: false,
+  time: ''
 };
 
 const RoundContext = createContext<{
@@ -57,6 +60,7 @@ const RoundReducer = (state: RoundStateType, action: any) => {
 
       return {
         ...state,
+        isComplete: false,
         spiders: [
           ...state.spiders.slice(0, foundIndex),
           updatedSpider,
@@ -84,9 +88,9 @@ const RoundReducer = (state: RoundStateType, action: any) => {
       return {
         ...state,
         ...roundsData[state.round - 1],
-        isComplete: false,
         showCompletePopup: false,
-        error: ''
+        error: '',
+        time: ''
       };
     case actions.NEXT_ROUND:
       const nextRound = state.round + 1;
@@ -96,24 +100,25 @@ const RoundReducer = (state: RoundStateType, action: any) => {
         ...state,
         ...roundsData[nextRound - 1],
         round: nextRound,
-        isComplete: false,
         showCompletePopup: false,
-        error: ''
+        error: '',
+        time: ''
       };
     case actions.PREV_ROUND:
       const prevRound = state.round - 1;
       if (prevRound < 1) {
-        console.log('test');
         return { ...state, error: 'This is the first round!' };
       }
       return {
         ...state,
         ...roundsData[prevRound - 1],
         round: prevRound,
-        isComplete: false,
         showCompletePopup: false,
-        error: ''
+        error: '',
+        time: ''
       };
+    case 'TIME_STOP':
+      return { ...state, time: action.payload.time };
     default:
       return state;
   }
