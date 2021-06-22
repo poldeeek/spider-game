@@ -43,19 +43,16 @@ const Net: React.FC<{ spider1Id: number; spider2Id: number }> = ({
         transform: 'rotate(0deg)'
       });
     } else {
-      //const a = (y2 - y1) / (x2 - x1);
-      const degrees = (Math.atan2(y2 - y1, x2 - x1) * 180) / Math.PI;
+      const degrees =
+        ((Math.atan2(x1 - x2, y2 - y1) + Math.PI / 2.0) * 180) / Math.PI;
 
-      console.log(degrees);
-
-      // PROBLEM FOR MINUS DEGREE VALUES
       setStyle({
-        width: `${Math.sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1))}px`,
+        width: `${Math.hypot(x2 - x1, y2 - y1)}px`,
         left: (x1 + 75).toString() + 'px',
-        top: `${Math.min(y1, y2) + 75}px`,
+        top: `${y1 + 75}px`,
         height: `5px`,
         transform: `rotate(${degrees}deg)`,
-        transformOrigin: `${degrees > 0 ? '0% 0%' : '100% 100%'}`
+        transformOrigin: '0% 0%'
       });
     }
   }, [spider1, spider2]);
