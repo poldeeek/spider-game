@@ -60,19 +60,19 @@ const round3Data: IRoundData = {
     },
     {
       pair: [0, 3],
-      isIntersection: false
+      isIntersection: true
     },
     {
       pair: [0, 4],
-      isIntersection: false
+      isIntersection: true
     },
     {
       pair: [5, 2],
-      isIntersection: false
+      isIntersection: true
     },
     {
       pair: [5, 1],
-      isIntersection: false
+      isIntersection: true
     }
   ]
 };

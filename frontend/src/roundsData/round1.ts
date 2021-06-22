@@ -42,11 +42,11 @@ const round1Data: IRoundData = {
     },
     {
       pair: [1, 2],
-      isIntersection: false
+      isIntersection: true
     },
     {
       pair: [0, 3],
-      isIntersection: false
+      isIntersection: true
     }
   ]
 };

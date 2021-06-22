@@ -41,11 +41,11 @@ const round3Data: IRoundData = {
   nets: [
     {
       pair: [0, 1],
-      isIntersection: false
+      isIntersection: true
     },
     {
       pair: [0, 2],
-      isIntersection: false
+      isIntersection: true
     },
     {
       pair: [1, 2],
@@ -61,7 +61,7 @@ const round3Data: IRoundData = {
     },
     {
       pair: [3, 4],
-      isIntersection: false
+      isIntersection: true
     }
   ]
 };

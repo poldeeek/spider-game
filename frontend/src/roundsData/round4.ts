@@ -63,27 +63,27 @@ const round4Data: IRoundData = {
     },
     {
       pair: [1, 2],
-      isIntersection: false
+      isIntersection: true
     },
     {
       pair: [0, 3],
-      isIntersection: false
+      isIntersection: true
     },
     {
       pair: [0, 4],
-      isIntersection: false
+      isIntersection: true
     },
     {
       pair: [5, 2],
-      isIntersection: false
+      isIntersection: true
     },
     {
       pair: [5, 1],
-      isIntersection: false
+      isIntersection: true
     },
     {
       pair: [6, 0],
-      isIntersection: false
+      isIntersection: true
     }
   ]
 };
