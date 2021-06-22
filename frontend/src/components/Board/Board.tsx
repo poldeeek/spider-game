@@ -22,10 +22,8 @@ const Board = () => {
     <div className='board'>
       {spiders &&
         spiders.map((spider) => {
-          // why doesn't work ? changing one spider in context state change them all in some way ?
-          return useMemo(() => {
-            return <Spider key={spider.id} spiderId={spider.id} />;
-          }, [spider]);
+          // why useMemo doesn't work ? changing one spider in context state change them all in some way ?
+          return <Spider key={spider.id} spiderId={spider.id} />;
         })}
       {nets.map((net, i) => {
         return (
