@@ -9,6 +9,7 @@ const CompletePopup = () => {
 
   const round = roundState.round;
   const error = roundState.error;
+  const time = roundState.time;
 
   const retry = () => {
     roundDispatch({
@@ -37,18 +38,19 @@ const CompletePopup = () => {
     <>
       <div className='backgroundShadow'></div>
       <div className='popup'>
-        <h1>Level {round}</h1>
-        <h2>Completed</h2>
+        <h1 className='popup__level'>Level {round}</h1>
+        <h3>Completed</h3>
         <h2>Time</h2>
+        <h3>{time}</h3>
         <div className='popup__buttons'>
-          <div className='popup__button' onClick={prevRound}>
-            Prev level
+          <div className='popup__button' onClick={prevRound} title='Prev round'>
+            <div className='arrow arrow__left'></div>
           </div>
           <div className='popup__button' onClick={retry}>
-            Retry
+            Replay
           </div>
-          <div className='popup__button' onClick={nextRound}>
-            Next round
+          <div className='popup__button' onClick={nextRound} title='Next round'>
+            <div className='arrow arrow__right'></div>
           </div>
         </div>
         {info}

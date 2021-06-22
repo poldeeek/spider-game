@@ -2,22 +2,34 @@
   position: absolute;
   top: calc(50vh - 20rem);
   left: calc(50vw - 20rem);
-  height: 40rem;
   width: 40rem;
-  background-color: gray;
+  background-color: #052555;
   z-index: 160;
   display: flex;
   flex-direction: column;
   align-items: center;
   border-radius: 1rem;
   padding: 2rem;
+  border: 4px solid #052555;
 
   h1 {
     font-size: 2.8rem;
+    margin-bottom: 0rem;
+  }
+
+  h2 {
+    margin-bottom: 0rem;
+  }
+
+  h3 {
+    margin-top: 0.3rem;
+    margin-bottom: 1.8rem;
+    letter-spacing: 0.11rem;
   }
 
   &__buttons {
     display: flex;
+    margin-top: 2rem;
   }
 
   &__button {
@@ -25,11 +37,15 @@
     justify-content: center;
     align-items: center;
     margin: 1rem;
-    border: 1px solid black;
+    border: 1px solid #eee;
     border-radius: 1rem;
     padding: 1rem;
     width: 10rem;
     cursor: pointer;
+
+    &:hover {
+      background-color: darken(#052555, 2%);
+    }
   }
 
   &__error {
