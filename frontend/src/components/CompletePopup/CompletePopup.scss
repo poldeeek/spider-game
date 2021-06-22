@@ -31,6 +31,10 @@
     width: 10rem;
     cursor: pointer;
   }
+
+  &__error {
+    color: red;
+  }
 }
 
 .backgroundShadow {

@@ -20,12 +20,14 @@ export type RoundStateType = {
   roundsNumber: number;
   isComplete: boolean;
   showCompletePopup: boolean;
+  error: string;
   spiders: ISpider[];
   nets: TNet[];
 };
 
 const initState: RoundStateType = {
   ...roundsData[0],
+  error: '',
   roundsNumber: roundsData.length,
   round: 1,
   isComplete: false,
@@ -73,7 +75,8 @@ const RoundReducer = (state: RoundStateType, action: any) => {
         return {
           ...state,
           isComplete: true,
-          showCompletePopup: true
+          showCompletePopup: true,
+          error: ''
         };
       }
       return state;
@@ -82,34 +85,34 @@ const RoundReducer = (state: RoundStateType, action: any) => {
         ...state,
         ...roundsData[state.round - 1],
         isComplete: false,
-        showCompletePopup: false
-      };
-    case actions.REPLAY:
-      return {
-        ...state,
-        ...roundsData[state.round - 1],
-        isComplete: false,
-        showCompletePopup: false
+        showCompletePopup: false,
+        error: ''
       };
     case actions.NEXT_ROUND:
       const nextRound = state.round + 1;
-      if (nextRound > state.roundsNumber) return state;
+      if (nextRound > state.roundsNumber)
+        return { ...state, error: 'That was the last round!' };
       return {
         ...state,
         ...roundsData[nextRound - 1],
         round: nextRound,
         isComplete: false,
-        showCompletePopup: false
+        showCompletePopup: false,
+        error: ''
       };
     case actions.PREV_ROUND:
       const prevRound = state.round - 1;
-      if (prevRound < 1) return state;
+      if (prevRound < 1) {
+        console.log('test');
+        return { ...state, error: 'This is the first round!' };
+      }
       return {
         ...state,
         ...roundsData[prevRound - 1],
         round: prevRound,
         isComplete: false,
-        showCompletePopup: false
+        showCompletePopup: false,
+        error: ''
       };
     default:
       return state;

@@ -8,7 +8,7 @@ const CompletePopup = () => {
   const { roundState, roundDispatch } = useContext(RoundContext);
 
   const round = roundState.round;
-  const roundsNumber = roundState.roundsNumber;
+  const error = roundState.error;
 
   const retry = () => {
     roundDispatch({
@@ -17,18 +17,21 @@ const CompletePopup = () => {
   };
 
   const nextRound = () => {
-    if (round >= roundsNumber) return;
     roundDispatch({
       type: NEXT_ROUND
     });
   };
 
   const prevRound = () => {
-    if (round <= 1) return;
     roundDispatch({
       type: PREV_ROUND
     });
   };
+
+  let info = null;
+  if (error) {
+    info = <div className='popup__error'>{error}</div>;
+  }
 
   return (
     <>
@@ -48,6 +51,7 @@ const CompletePopup = () => {
             Next round
           </div>
         </div>
+        {info}
       </div>
     </>
   );
