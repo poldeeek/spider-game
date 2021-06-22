@@ -17,6 +17,7 @@ export type TNet = { pair: [number, number]; isIntersection: boolean };
 
 export type RoundStateType = {
   round: number;
+  roundsNumber: number;
   isComplete: boolean;
   showCompletePopup: boolean;
   spiders: ISpider[];
@@ -25,6 +26,7 @@ export type RoundStateType = {
 
 const initState: RoundStateType = {
   ...roundsData[0],
+  roundsNumber: roundsData.length,
   round: 1,
   isComplete: false,
   showCompletePopup: false
