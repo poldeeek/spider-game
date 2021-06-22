@@ -13,7 +13,7 @@ export interface ISpider {
 
 export type TNet = { pair: [number, number]; isIntersection: boolean };
 
-type SpidersStateType = {
+export type SpidersStateType = {
   spiders: ISpider[];
   nets: TNet[];
 };
@@ -45,8 +45,8 @@ const initState: SpidersStateType = {
       id: 3,
       initTop: 250,
       initLeft: 100,
-      y: 250,
-      x: 100
+      y: 0,
+      x: 400
     }
   ],
   nets: [
