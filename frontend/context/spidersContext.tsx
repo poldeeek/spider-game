@@ -23,29 +23,29 @@ const initState: InitialStateType = {
       id: 0,
       initTop: 300,
       initLeft: 400,
-      x: 300,
-      y: 400
+      y: 300,
+      x: 400
     },
     {
       id: 1,
       initTop: 50,
       initLeft: 100,
-      x: 50,
-      y: 100
+      y: 50,
+      x: 100
     },
     {
       id: 2,
       initTop: 50,
       initLeft: 700,
-      x: 50,
-      y: 700
+      y: 50,
+      x: 700
     },
     {
       id: 3,
       initTop: 250,
       initLeft: 100,
-      x: 250,
-      y: 100
+      y: 250,
+      x: 100
     }
   ],
   nets: [

@@ -51,15 +51,15 @@ const Spider: React.FC<ISpiderProps> = ({ spiderId }) => {
     // set the element's new position:
     if (!myRef || !myRef.current) return;
 
-    const top = myRef.current.offsetTop - pos2;
-    const left = myRef.current.offsetLeft - pos1;
+    const X = myRef.current.offsetLeft - pos1;
+    const Y = myRef.current.offsetTop - pos2;
 
     dispatch({
       type: CHANGE_SPIDER_POSITION,
       payload: {
         id: spiderId,
-        x: top,
-        y: left
+        x: X,
+        y: Y
       }
     });
   };
@@ -67,8 +67,8 @@ const Spider: React.FC<ISpiderProps> = ({ spiderId }) => {
   useEffect(() => {
     if (!myRef || !myRef.current) return;
 
-    myRef.current.style.top = spider.x + 'px';
-    myRef.current.style.left = spider.y + 'px';
+    myRef.current.style.left = spider.x + 'px';
+    myRef.current.style.top = spider.y + 'px';
   }, [spider]);
 
   return (

@@ -20,10 +20,10 @@ const Net: React.FC<{ spider1Id: number; spider2Id: number }> = ({
 
   if (!spider1 || !spider2) return null;
   useEffect(() => {
-    let x1 = spider1.y;
-    let y1 = spider1.x;
-    let x2 = spider2.y;
-    let y2 = spider2.x;
+    let x1 = spider1.x;
+    let y1 = spider1.y;
+    let x2 = spider2.x;
+    let y2 = spider2.y;
 
     if (x1 > x2) {
       let xTmp = x1;
@@ -43,9 +43,10 @@ const Net: React.FC<{ spider1Id: number; spider2Id: number }> = ({
         transform: 'rotate(0deg)'
       });
     } else {
-      const a = (y2 - y1) / (x2 - x1);
-      const radians = Math.atan(a);
-      const degrees = radians * (180 / Math.PI);
+      //const a = (y2 - y1) / (x2 - x1);
+      const degrees = (Math.atan2(y2 - y1, x2 - x1) * 180) / Math.PI;
+
+      console.log(degrees);
 
       // PROBLEM FOR MINUS DEGREE VALUES
       setStyle({
