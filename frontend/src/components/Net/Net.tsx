@@ -13,7 +13,7 @@ const Net: React.FC<INetProps> = ({ spider1Id, spider2Id, isIntersection }) => {
   const [style, setStyle] = useState({});
   const myRef = useRef<HTMLDivElement>(null);
 
-  const { spidersState, dispatch } = useContext(SpidersContext);
+  const { spidersState } = useContext(SpidersContext);
   const spider1 = spidersState.spiders.find(
     (spider) => spider.id === spider1Id
   );

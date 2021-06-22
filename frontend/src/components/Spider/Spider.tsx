@@ -15,7 +15,7 @@ interface ISpiderProps {
 
 const Spider: React.FC<ISpiderProps> = ({ spiderId }) => {
   const [active, setActive] = useState(false);
-  const { spidersState, dispatch } = useContext(SpidersContext);
+  const { spidersState, spidersDispatch } = useContext(SpidersContext);
   const spider = spidersState.spiders.find((spider) => spider.id === spiderId);
 
   if (!spider) return null;
@@ -87,7 +87,7 @@ const Spider: React.FC<ISpiderProps> = ({ spiderId }) => {
     const X = myRef.current.offsetLeft - pos1;
     const Y = myRef.current.offsetTop - pos2;
 
-    dispatch({
+    spidersDispatch({
       type: CHANGE_SPIDER_POSITION,
       payload: {
         id: spiderId,
@@ -97,7 +97,7 @@ const Spider: React.FC<ISpiderProps> = ({ spiderId }) => {
     });
 
     // can be also in handleMouseUp function to check the lines after user drop the spider
-    dispatch({ type: CHECK_INTERSECTION });
+    spidersDispatch({ type: CHECK_INTERSECTION });
   };
 
   useEffect(() => {

@@ -6,12 +6,12 @@ import SpidersContext from '../../../context/spidersContext';
 import { CHECK_INTERSECTION } from '../../../context/actionTypes';
 
 const Board = () => {
-  const { spidersState, dispatch } = useContext(SpidersContext);
+  const { spidersState, spidersDispatch } = useContext(SpidersContext);
   const spiders = spidersState.spiders;
   const nets = spidersState.nets;
 
   useEffect(() => {
-    dispatch({
+    spidersDispatch({
       type: CHECK_INTERSECTION
     });
   }, []);

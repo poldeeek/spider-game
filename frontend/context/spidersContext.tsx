@@ -71,10 +71,10 @@ const initState: SpidersStateType = {
 
 const SpidersContext = createContext<{
   spidersState: SpidersStateType;
-  dispatch: Dispatch<any>;
+  spidersDispatch: Dispatch<any>;
 }>({
   spidersState: initState,
-  dispatch: () => null
+  spidersDispatch: () => null
 });
 
 const SpidersReducer = (state: SpidersStateType, action: any) => {
@@ -113,7 +113,8 @@ const SpidersProvider: React.FC<{}> = ({ children }) => {
   const [state, dispatch] = useReducer(SpidersReducer, initState);
 
   return (
-    <SpidersContext.Provider value={{ spidersState: state, dispatch }}>
+    <SpidersContext.Provider
+      value={{ spidersState: state, spidersDispatch: dispatch }}>
       {children}
     </SpidersContext.Provider>
   );
