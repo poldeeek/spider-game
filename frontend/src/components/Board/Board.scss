@@ -2,8 +2,8 @@
   margin: 0 auto;
   height: 50rem;
   width: 100rem;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.05)),
-    url('../../images/grass.jpg');
+  background-image: url('../../images/grass.jpg');
+  background-size: cover;
   position: relative;
   border-radius: 1rem;
 }
