@@ -4,8 +4,11 @@ import checkIntersections from '../helpers/checkIntersection';
 import {
   CHANGE_SPIDER_POSITION,
   CHECK_INTERSECTION,
-  CHECK_IS_COMPLETED
+  CHECK_IS_COMPLETED,
+  REPLAY
 } from './actionTypes';
+
+import roundsData from '../roundsData/rounds';
 
 export interface ISpider {
   id: number;
@@ -26,57 +29,10 @@ export type RoundStateType = {
 };
 
 const initState: RoundStateType = {
+  ...roundsData[0],
   round: 1,
   isComplete: false,
-  showCompletePopup: false,
-  spiders: [
-    {
-      id: 0,
-      initTop: 300,
-      initLeft: 400,
-      y: 300,
-      x: 400
-    },
-    {
-      id: 1,
-      initTop: 50,
-      initLeft: 100,
-      y: 50,
-      x: 100
-    },
-    {
-      id: 2,
-      initTop: 50,
-      initLeft: 700,
-      y: 50,
-      x: 700
-    },
-    {
-      id: 3,
-      initTop: 250,
-      initLeft: 100,
-      y: 0,
-      x: 400
-    }
-  ],
-  nets: [
-    {
-      pair: [0, 1],
-      isIntersection: false
-    },
-    {
-      pair: [0, 2],
-      isIntersection: false
-    },
-    {
-      pair: [1, 2],
-      isIntersection: false
-    },
-    {
-      pair: [0, 3],
-      isIntersection: false
-    }
-  ]
+  showCompletePopup: false
 };
 
 const RoundContext = createContext<{
@@ -124,6 +80,13 @@ const RoundReducer = (state: RoundStateType, action: any) => {
         };
       }
       return state;
+    case REPLAY:
+      return {
+        ...state,
+        ...roundsData[state.round - 1],
+        isComplete: false,
+        showCompletePopup: false
+      };
     default:
       return state;
   }
