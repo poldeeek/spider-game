@@ -93,11 +93,21 @@ const RoundReducer = (state: RoundStateType, action: any) => {
       };
     case actions.NEXT_ROUND:
       const nextRound = state.round + 1;
-
+      if (nextRound > state.roundsNumber) return state;
       return {
         ...state,
         ...roundsData[nextRound - 1],
         round: nextRound,
+        isComplete: false,
+        showCompletePopup: false
+      };
+    case actions.PREV_ROUND:
+      const prevRound = state.round - 1;
+      if (prevRound < 1) return state;
+      return {
+        ...state,
+        ...roundsData[prevRound - 1],
+        round: prevRound,
         isComplete: false,
         showCompletePopup: false
       };

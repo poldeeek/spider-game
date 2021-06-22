@@ -1,6 +1,6 @@
-import { useContext, useEffect, useMemo } from 'react';
+import { useContext } from 'react';
 import RoundContext from '../../context/roundContext';
-import { REPLAY, NEXT_ROUND } from '../../context/actionTypes';
+import { REPLAY, NEXT_ROUND, PREV_ROUND } from '../../context/actionTypes';
 
 import './CompletePopup.scss';
 
@@ -23,6 +23,13 @@ const CompletePopup = () => {
     });
   };
 
+  const prevRound = () => {
+    if (round <= 1) return;
+    roundDispatch({
+      type: PREV_ROUND
+    });
+  };
+
   return (
     <>
       <div className='backgroundShadow'></div>
@@ -31,7 +38,9 @@ const CompletePopup = () => {
         <h2>Completed</h2>
         <h2>Time</h2>
         <div className='popup__buttons'>
-          <div className='popup__button'>Prev level</div>
+          <div className='popup__button' onClick={prevRound}>
+            Prev level
+          </div>
           <div className='popup__button' onClick={retry}>
             Retry
           </div>
