@@ -1,10 +1,10 @@
 import { useEffect, useContext, useState, MouseEvent, useRef } from 'react';
 import './Spider.scss';
-import SpidersContext from '../../../context/spidersContext';
+import SpidersContext from '../../context/spidersContext';
 import {
   CHANGE_SPIDER_POSITION,
   CHECK_INTERSECTION
-} from '../../../context/actionTypes';
+} from '../../context/actionTypes';
 
 interface ISpiderProps {
   spiderId: number;

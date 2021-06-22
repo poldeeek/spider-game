@@ -1,6 +1,6 @@
 import { useReducer, Dispatch } from 'react';
 import { createContext } from 'react';
-import checkIntersections from '../src/helpers/checkIntersection';
+import checkIntersections from '../helpers/checkIntersection';
 import { CHANGE_SPIDER_POSITION, CHECK_INTERSECTION } from './actionTypes';
 
 export interface ISpider {

@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, useContext } from 'react';
-import SpidersContext from '../../../context/spidersContext';
+import SpidersContext from '../../context/spidersContext';
 
 import './Net.scss';
 

@@ -2,11 +2,13 @@ import { useContext, useEffect, useMemo } from 'react';
 import './Board.scss';
 import Spider from '../Spider/Spider';
 import Net from '../Net/Net';
-import SpidersContext from '../../../context/spidersContext';
-import { CHECK_INTERSECTION } from '../../../context/actionTypes';
+import SpidersContext from '../../context/spidersContext';
+
+import { CHECK_INTERSECTION } from '../../context/actionTypes';
 
 const Board = () => {
   const { spidersState, spidersDispatch } = useContext(SpidersContext);
+
   const spiders = spidersState.spiders;
   const nets = spidersState.nets;
 

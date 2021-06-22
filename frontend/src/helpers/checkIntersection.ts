@@ -1,5 +1,5 @@
-import { TNet } from '../../context/spidersContext';
-import { SpidersStateType } from '../../context/spidersContext';
+import { TNet } from '../context/spidersContext';
+import { SpidersStateType } from '../context/spidersContext';
 
 type Point = [number, number];
 
