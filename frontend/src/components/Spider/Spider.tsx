@@ -28,7 +28,7 @@ const Spider: React.FC<ISpiderProps> = ({ spiderId }) => {
     // image position
     setPos3(e.clientX);
     setPos4(e.clientY);
-
+    myRef.current.style.zIndex = '101';
     setActive(true);
   };
 
@@ -36,6 +36,8 @@ const Spider: React.FC<ISpiderProps> = ({ spiderId }) => {
     e = e || window.event;
     e.preventDefault();
     setActive(false);
+    if (!myRef || !myRef.current) return;
+    myRef.current.style.zIndex = '100';
   };
 
   const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
