@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext } from 'react';
 import RoundContext from '../../context/roundContext';
-
+import { TIME_STOP } from '../../context/actionTypes';
 import './Timer.scss';
 
 const Timer: React.FC = () => {
@@ -18,7 +18,7 @@ const Timer: React.FC = () => {
       setIsActive(true);
     } else {
       roundDispatch({
-        type: 'TIME_STOP',
+        type: TIME_STOP,
         payload: {
           time: `${minute}:${second}`
         }

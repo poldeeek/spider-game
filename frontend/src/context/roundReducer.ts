@@ -75,7 +75,7 @@ const RoundReducer = (state: RoundStateType, action: any) => {
         error: '',
         time: ''
       };
-    case 'TIME_STOP':
+    case actions.TIME_STOP:
       return { ...state, time: action.payload.time };
     default:
       return state;
